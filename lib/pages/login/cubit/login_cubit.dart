@@ -30,40 +30,39 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   Future<void> LoginOnStartUp() async {
-    emit(LoginState(loading: false,status: LoginStatus.Uninitialized));
+    emit(LoginState(loading: false, user: null, status: LoginStatus.Uninitialized));
     user = await repository.getUser();
     if(user !=null){
-      emit(LoginState(user: user,token: user.token,status: LoginStatus.Authenticated,loading: false));
+      emit(LoginState(user: user,status: LoginStatus.Authenticated, loading: false));
     }else{
-      emit(LoginState(user: null,token: null,status: LoginStatus.Unauthenticated,loading: false));
+      emit(LoginState(user: null,status: LoginStatus.Unauthenticated, loading: false));
     }
   }
 
   Future<void> Login({Key key,String email,String password}) async {
-    emit(LoginState(loading: true));
+    emit(LoginState(user: user, status: status, loading: true));
     user = await repository.authenticate(email: email, password: password);
 
-    if(user == null){
-      showToastTop(message: 'Credenziali errate!',bgColor: Theme.of(navigatorKey.currentContext).backgroundColor);
-      emit(LoginState(user: null,token: null,status: LoginStatus.Unauthenticated,loading: false));
-    }else{
+    if(user != null){
       await repository.persistUser(user);
-      emit(LoginState(user: null,token: null,status: LoginStatus.Unauthenticated,loading: false));
-      loadView(navigatorKey.currentContext,tabControllerPageRoute);
+      emit(LoginState(user: user,status: LoginStatus.Authenticated,loading: false));
+      //loadView(navigatorKey.currentContext,tabControllerPageRoute);
+    }else{
+      showToastTop(message: 'Credenziali errate!',bgColor: Theme.of(navigatorKey.currentContext).backgroundColor);
+      emit(LoginState(user: null,status: LoginStatus.Unauthenticated,loading: false));
     }
   }
 
   Future<void> Logout() async {
-    emit(LoginState(loading: true));
+    emit(LoginState(user: user, status: status, loading: true));
     await repository.deleteUser();
-    emit(LoginState(user: null,token: null,status: LoginStatus.Unauthenticated,loading: false));
+    emit(LoginState(user: null,status: LoginStatus.Unauthenticated,loading: false));
   }
 
   bool isAuth(){
     if(user != null && status == LoginStatus.Authenticated){
       return true;
     }
-
     return false;
   }
 }

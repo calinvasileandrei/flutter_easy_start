@@ -25,7 +25,6 @@ class AuthRepository {
 
       if (authResponse.statusCode == 200) {
         Map<String,dynamic> bodyParsed = json.decode(authResponse.body);
-        print('JSON USER DATA FROM FLAMI '+bodyParsed.toString());
         return User.fromMapAPI(bodyParsed['user'],bodyParsed['id_token']);
       }
     } catch (err) {

@@ -21,8 +21,9 @@ class LogoutAlerDialog extends StatelessWidget {
             )),
         TextButton(
             onPressed: () => {
+              BlocProvider.of<LoginCubit>(context).Logout(),
               Navigator.pop(context),
-              BlocProvider.of<LoginCubit>(context).Logout()},
+            },
             child: Text(
               "Conferma",
               style: TextStyle(color: Colors.black),

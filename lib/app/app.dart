@@ -15,10 +15,11 @@ import 'package:flutter_easy_start/pages/login/view/login_page.dart';
 import 'package:flutter_easy_start/pages/splash_screen/view/splash_screen_page.dart';
 import 'package:flutter_easy_start/routing/router.dart' as router;
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_easy_start/tab_bar/view/tab_bar_controller.dart';
+import 'package:flutter_easy_start/tad_widgets/view/tab_bar/tab_bar_controller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
+
 class AppInitializer extends StatelessWidget {
   var authRepository = AuthRepository();
   @override
@@ -35,11 +36,10 @@ class AppInitializer extends StatelessWidget {
       child: ScreenUtilInit(
           allowFontScaling: false,
           designSize: Size(1125, 2436),
-          builder: ()=> const App()),
-    );  }
+          builder: () => const App()),
+    );
+  }
 }
-
-
 
 class App extends StatefulWidget {
   const App({Key key}) : super(key: key);
@@ -49,7 +49,6 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> with WidgetsBindingObserver {
-
   @override
   void initState() {
     WidgetsBinding.instance.addObserver(this);
@@ -67,30 +66,31 @@ class _AppState extends State<App> with WidgetsBindingObserver {
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginCubit,LoginState>(
+    return BlocBuilder<LoginCubit, LoginState>(
       builder: (context, state) {
         if (state.status == LoginStatus.Uninitialized) {
           return const MaterialApp(home: SplashScreenPage());
-        } else if(state.status == LoginStatus.Authenticated) {
+        } else if (state.status == LoginStatus.Authenticated) {
           return MaterialApp(
             title: appName,
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,
-            themeMode: context.select(
-                    (ThemeCubit themeCubit) => themeCubit.state.themeMode),
+            themeMode: context
+                .select((ThemeCubit themeCubit) => themeCubit.state.themeMode),
             onGenerateRoute: router.generateRoute,
             navigatorKey: navigatorKey,
             home: TabBarController(),
           );
-        }else{
+        } else {
           return MaterialApp(
             title: appName,
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,
-            themeMode: context.select(
-                    (ThemeCubit themeCubit) => themeCubit.state.themeMode),
+            themeMode: context
+                .select((ThemeCubit themeCubit) => themeCubit.state.themeMode),
             onGenerateRoute: router.generateRoute,
             navigatorKey: navigatorKey,
             home: LoginPage(),
