@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easy_start/core/app_shapes.dart';
-import 'package:flutter_easy_start/core/app_theme/app_theme.dart';
 import 'package:flutter_easy_start/pages/home/home.dart';
 import 'package:flutter_easy_start/pages/settings/view/settings_page.dart';
+import 'package:flutter_easy_start/tab_bar/view/drawer/app_drawer.dart';
 import 'package:flutter_easy_start/tab_bar/view/tab_icon.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'app_bar/app_bar_view.dart';
 
@@ -28,6 +27,7 @@ class _TabBarControllerState extends State<TabBarController>
     myTabs = [
       // Customize the NavBar Icons Buttons here \/
       const TabIcon(icon: Icons.home),
+      const TabIcon(icon: Icons.explore),
       const TabIcon(icon: Icons.more_horiz)
     ];
     _tabController = TabController(vsync: this, length: myTabs.length);
@@ -40,6 +40,7 @@ class _TabBarControllerState extends State<TabBarController>
       initialIndex: 0,
       child: Scaffold(
         appBar:  const AppBarCustom(),
+        drawer: AppDrawer(),
         bottomNavigationBar: Container(
           decoration: containerElevationShadow(bgColor: Theme.of(context).backgroundColor),
           child: SafeArea(
@@ -53,7 +54,7 @@ class _TabBarControllerState extends State<TabBarController>
             controller: _tabController,
             physics: const NeverScrollableScrollPhysics(),
             // Customize the pages here \/
-            children: [HomePage(), SettingsPage()],
+            children: [HomePage(),Container(), SettingsPage()],
           ),
         ),
         extendBody: true,
