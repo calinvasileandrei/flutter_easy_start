@@ -11,8 +11,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController emailController= TextEditingController();
-  TextEditingController passwordController= TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,30 +35,52 @@ class _LoginPageState extends State<LoginPage> {
                     width: 200,
                     height: 200,
                     child: new Image.asset('assets/images/splash.png')),
-                InputTextField(width: ScreenUtil().screenWidth*0.8, height: 150.h, marginVertical: 30.h, controller: emailController, enabledTextField: true, icon: Icons.email, hintText: "Inserire l'email"),
-                InputTextField(width: ScreenUtil().screenWidth*0.8, height: 150.h, obfuscaredText: true, marginVertical: 30.h, controller: passwordController, enabledTextField: true, icon: Icons.security, hintText: 'Inserire la password'),
+                InputTextField(
+                    width: ScreenUtil().screenWidth * 0.8,
+                    height: 150.h,
+                    marginVertical: 30.h,
+                    controller: emailController,
+                    enabledTextField: true,
+                    icon: Icons.email,
+                    hintText: "Inserire l'email"),
+                InputTextField(
+                    width: ScreenUtil().screenWidth * 0.8,
+                    height: 150.h,
+                    obfuscaredText: true,
+                    marginVertical: 30.h,
+                    controller: passwordController,
+                    enabledTextField: true,
+                    icon: Icons.security,
+                    hintText: 'Inserire la password'),
                 Container(
                     margin: EdgeInsets.only(top: 50.h),
-                    width: ScreenUtil().screenWidth*0.8,
+                    width: ScreenUtil().screenWidth * 0.8,
                     height: 150.h,
-                    child: ElevatedButton(onPressed: () {
-                      FocusScope.of(context).requestFocus(new FocusNode());
-                      BlocProvider.of<LoginCubit>(context).Login(email: emailController.text.trim(),password: passwordController.text.trim());
-                    },
-                        style: ElevatedButton.styleFrom( primary:  Theme.of(context).accentColor , shape: appCardShape,),
-                        child: Text('Login',style:  Theme.of(context).textTheme.bodyText1.copyWith(color:  Theme.of(context).backgroundColor),)
-                    )
-                ),
-                    BlocBuilder<LoginCubit,LoginState>(
-                      builder: (context, state) {
-                        if(state.loading){
-                         return Container(
-                             margin: EdgeInsets.only(top: 100.h),
-                             child: CircularProgressIndicator());
-                        }else{
-                          return Container();
-                        }
-                      }),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          FocusScope.of(context).requestFocus(new FocusNode());
+                          BlocProvider.of<LoginCubit>(context).login(
+                              email: emailController.text.trim(),
+                              password: passwordController.text.trim());
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: Theme.of(context).accentColor,
+                          shape: appCardShape,
+                        ),
+                        child: Text(
+                          'Login',
+                          style: Theme.of(context).textTheme.bodyText1.copyWith(
+                              color: Theme.of(context).backgroundColor),
+                        ))),
+                BlocBuilder<LoginCubit, LoginState>(builder: (context, state) {
+                  if (state.loading) {
+                    return Container(
+                        margin: EdgeInsets.only(top: 100.h),
+                        child: CircularProgressIndicator());
+                  } else {
+                    return Container();
+                  }
+                }),
               ],
             ),
           ),
@@ -67,4 +89,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-

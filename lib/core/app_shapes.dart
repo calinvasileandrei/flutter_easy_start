@@ -8,8 +8,7 @@ const _circularRadius = 24.0;
 
 BorderRadius appBorderRadius = BorderRadius.circular(_circularRadius);
 
-
-Decoration containerElevationShadow({Key key,bgColor}) {
+Decoration containerElevationShadow({Key key, bgColor}) {
   return BoxDecoration(
     color: bgColor,
     borderRadius: BorderRadius.all(Radius.circular(_circularRadius)),
@@ -19,12 +18,11 @@ Decoration containerElevationShadow({Key key,bgColor}) {
   );
 }
 
-  RoundedRectangleBorder appCardShape = RoundedRectangleBorder(
-    borderRadius: appBorderRadius,
-  );
+RoundedRectangleBorder appCardShape = RoundedRectangleBorder(
+  borderRadius: appBorderRadius,
+);
 
-  OutlineInputBorder appInputBorder = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(_circularRadius),
-    borderSide: const BorderSide(color: Colors.grey, width: 1.0),
-  );
-
+OutlineInputBorder appInputBorder = OutlineInputBorder(
+  borderRadius: BorderRadius.circular(_circularRadius),
+  borderSide: const BorderSide(color: Colors.grey, width: 1.0),
+);

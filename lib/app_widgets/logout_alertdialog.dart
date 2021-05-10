@@ -8,8 +8,14 @@ class LogoutAlerDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       shape: appCardShape,
-      title: Text("Attenzione",style: Theme.of(context).textTheme.subtitle2,),
-      content: Text('Sei sicuro di voler uscire?',style: Theme.of(context).textTheme.bodyText1,),
+      title: Text(
+        "Attenzione",
+        style: Theme.of(context).textTheme.subtitle2,
+      ),
+      content: Text(
+        'Sei sicuro di voler uscire?',
+        style: Theme.of(context).textTheme.bodyText1,
+      ),
       actions: <Widget>[
         TextButton(
             onPressed: () => Navigator.pop(context),
@@ -21,9 +27,9 @@ class LogoutAlerDialog extends StatelessWidget {
             )),
         TextButton(
             onPressed: () => {
-              BlocProvider.of<LoginCubit>(context).Logout(),
-              Navigator.pop(context),
-            },
+                  BlocProvider.of<LoginCubit>(context).logout(),
+                  Navigator.pop(context),
+                },
             child: Text(
               "Conferma",
               style: TextStyle(color: Colors.black),

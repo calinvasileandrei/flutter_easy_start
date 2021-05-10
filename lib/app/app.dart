@@ -21,7 +21,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
 
 class AppInitializer extends StatelessWidget {
-  var authRepository = AuthRepository();
+  final AuthRepository authRepository = AuthRepository();
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(

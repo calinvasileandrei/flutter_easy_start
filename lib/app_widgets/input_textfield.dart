@@ -12,29 +12,30 @@ class InputTextField extends StatelessWidget {
   final double marginHorizontal;
   final bool obfuscaredText;
 
-  InputTextField({
-    Key key,
-    @required this.width,
-     this.height,
-    @required this.controller,
-    @required this.enabledTextField,
-    @required this.icon,
-    this.hintText='',
-    this.marginVertical=0,
-    this.marginHorizontal=0,
-    this.obfuscaredText=false
-  }) : super(key: key);
+  InputTextField(
+      {Key key,
+      @required this.width,
+      this.height,
+      @required this.controller,
+      @required this.enabledTextField,
+      @required this.icon,
+      this.hintText = '',
+      this.marginVertical = 0,
+      this.marginHorizontal = 0,
+      this.obfuscaredText = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.symmetric(vertical: marginVertical,horizontal: marginHorizontal ),
+        margin: EdgeInsets.symmetric(
+            vertical: marginVertical, horizontal: marginHorizontal),
         width: width,
         height: height,
         child: TextField(
           obscureText: obfuscaredText,
           controller: controller,
-          style: Theme.of(context).textTheme.caption,
+          style: Theme.of(context).textTheme.bodyText1,
           textAlignVertical: TextAlignVertical.center,
           enabled: enabledTextField,
           decoration: InputDecoration(
