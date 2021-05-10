@@ -1,16 +1,21 @@
 # flutter_easy_start
 
-A new Flutter project.
+Hello, my name is Andrew and I develop this easy starter project which you can use to set up your initial project.
 
-## Getting Started
+How it works?
 
-This project is a starting point for a Flutter application.
+Simple, create a new flutter project normally as you are used to,
+1 clone this project and replace your lib folder with this one.
+2 Then copy the assets folder inside your project.
+3 Replace your pubspec.yaml file with the pubspec in the easy starter project, remember to change the name with your app name.
+4 Create a .env file with your backend url marked as: BACKEND_URL=https://yourbackend.com
+5 Fix all the errors inside the lib folder relative to the project name, simply right click the lib folder and find the usage of flutter_easy_starter and replace     with your project name
+6 If the test file gives your error replace also there the package name.
 
-A few resources to get you started if this is your first Flutter project:
+## Now you are good to start :)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+My current backend returns for the login a json object with the user (check the model for further details) and a token (JWT Token).
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+I hope i will release a cli/executable to do all this tasks automatically.
+
+If you want to help this project or do you have any idea let me know :)
