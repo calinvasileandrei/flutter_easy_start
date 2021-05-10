@@ -3,6 +3,7 @@
 Hello, my name is Andrew and I develop this easy starter project which you can use to set up your initial project.
 
 How it works?
+After having intalled the cli on your computer,
 
 ### Automatic Setup using the cli
 Download the cli executable from my repository: https://github.com/calinvasileandrei/flutter_easy_cli/tree/master/executable ,
@@ -19,12 +20,12 @@ Now you can use the cli from everywhere in your computer by typing flutter_easy_
 
 ### Manual Setup
 Simple, create a new flutter project normally as you are used to,
-* 1) clone this project and replace your lib folder with this one.
-* 2) Then copy the assets folder inside your project.
-* 3) Replace your pubspec.yaml file with the pubspec in the easy starter project, remember to change the name with your app name.
-* 4) Replace the .env file and update it with your backend url marked as: BACKEND_URL=https://yourbackend.com/
-* 5) Fix all the errors inside the lib folder relative to the project name, simply right click the lib folder and find the usage of flutter_easy_starter and replace     with your project name
-* 6) If the test file gives your error replace also there the package name.
+  1) clone this project and replace your lib folder with this one.
+  2) Then copy the assets folder inside your project.
+  3) Replace your pubspec.yaml file with the pubspec in the easy starter project, remember to change the name with your app name.
+  4) Replace the .env file and update it with your backend url marked as: `BACKEND_URL=https://yourbackend.com/` 
+  5) Fix all the errors inside the lib folder relative to the project name, simply right click the lib folder and find the usage of flutter_easy_starter and replace     with your project name
+  6) If the test file gives your error replace also there the package name.
 
 #### Now you are good to start :)
 
