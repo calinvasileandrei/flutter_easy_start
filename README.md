@@ -29,25 +29,25 @@ Simple, create a new flutter project normally as you are used to,
 
 ### Auth Endpoint
 My current backend returns for the login a json object with the user (check the model for further details) and a token (JWT Token).
-`{
+```
+{
   user:{
        firstName:'',
        lastName:'',
        email:''
      },
   token: 'TOKEN_VALUE'
- }`
+}
+```
  And i save it in the user model which contains also the token as an attribute:
- `
+```
   User:{
        firstName: String,
        lastName: String,
        email: String,
        token: String
   }
-`
-
-~~I hope i will release a cli/executable to do all this tasks automatically.~~
+```
 
 If you want to help this project or do you have any idea let me know :)
 
