@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easy_start/core/app_toast.dart';
 import 'package:flutter_easy_start/core/models/user.dart';
 import 'package:flutter_easy_start/core/repositories/auth_repository.dart';
+import 'package:flutter_easy_start/core/repositories/response_message/response_message.dart';
+import 'package:flutter_easy_start/core/repositories/response_message/response_message_status.dart';
 
 part 'login_state.dart';
 
@@ -40,18 +42,15 @@ class LoginCubit extends Cubit<LoginState> {
 
   Future<void> login({Key key, String email, String password}) async {
     emit(LoginState(user: user, status: status, loading: true));
-    user = await repository.authenticate(email: email, password: password);
+    ResponseMessage<User> response = await repository.authenticate(email: email, password: password);
 
-    if (user != null) {
+    if (response.body != null && response.status == ResponseMessageStatus.s200) {
+      user = response.body;
       await repository.persistUser(user);
-      emit(LoginState(
-          user: user, status: LoginStatus.Authenticated, loading: false));
+      emit(LoginState(user: user, status: LoginStatus.Authenticated, loading: false));
     } else {
-      showToastTop(
-          message: 'Credenziali errate!',
-          bgColor: Theme.of(navigatorKey.currentContext).backgroundColor);
-      emit(LoginState(
-          user: null, status: LoginStatus.Unauthenticated, loading: false));
+      showToastTop(message: 'Credenziali errate!', bgColor: Theme.of(navigatorKey.currentContext).backgroundColor);
+      emit(LoginState(user: null, status: LoginStatus.Unauthenticated, loading: false));
     }
   }
 

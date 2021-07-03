@@ -1,36 +1,30 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_easy_start/core/models/user.dart';
+import 'package:flutter_easy_start/core/repositories/response_message/response_message.dart';
+import 'package:flutter_easy_start/core/repositories/send_request/send_request.dart';
+import 'package:flutter_easy_start/core/repositories/send_request/send_request_methods.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
-import 'package:flutter_dotenv/flutter_dotenv.dart' as DotEnv;
 
 class AuthRepository {
   Map<String, String> headers = {'Content-Type': 'application/json'};
 
-  Future<User> authenticate({
+  Future<ResponseMessage<User>> authenticate({
     @required String email,
     @required String password,
   }) async {
-    var body={
-      'email':email,
-      'password':password
-    };
 
-    try {
-      final authResponse = await http.post(
-          DotEnv.env["BACKEND_URL"] + "api/authenticate",
-          headers: headers,
-          body: json.encode(body));
-
-      if (authResponse.statusCode == 200) {
-        Map<String,dynamic> bodyParsed = json.decode(authResponse.body);
+    ResponseMessage<User> response = await SendRequests.send(
+      method: SendRequestsMethods.POST,
+      endpoint: "api/authenticate",
+      body: {
+        'email':email,
+        'password':password
+      },
+      onSuccessBody: (bodyParsed){
         return User.fromMapAPI(bodyParsed['user'],bodyParsed['id_token']);
       }
-    } catch (err) {
-      return null;
-    }
-    return null;
+    );
+    return response;
   }
 
   Future<void> deleteUser() async {
