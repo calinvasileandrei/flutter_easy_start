@@ -3,7 +3,7 @@ import 'package:flutter_easy_start/core/app_shapes.dart';
 
 class InputTextField extends StatelessWidget {
   final double width;
-  final double height;
+  final double? height;
   final TextEditingController controller;
   final bool enabledTextField;
   final String hintText;
@@ -13,12 +13,12 @@ class InputTextField extends StatelessWidget {
   final bool obfuscaredText;
 
   InputTextField(
-      {Key key,
-      @required this.width,
+      {Key? key,
+      required this.width,
       this.height,
-      @required this.controller,
-      @required this.enabledTextField,
-      @required this.icon,
+      required this.controller,
+      required this.enabledTextField,
+      required this.icon,
       this.hintText = '',
       this.marginVertical = 0,
       this.marginHorizontal = 0,
@@ -43,8 +43,9 @@ class InputTextField extends StatelessWidget {
                 icon,
                 color: Colors.grey,
               ),
-              border: appInputBorder,
-              focusedBorder: appInputBorder,
+              border: AppShapes.appInputBorder,
+              focusedBorder: AppShapes.appInputBorder,
+              enabledBorder: AppShapes.appInputBorder,
               hintText: hintText),
         ));
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TabIcon extends StatelessWidget {
-  const TabIcon({Key key, this.callback, @required this.icon})
+  const TabIcon({Key? key, this.callback, required this.icon})
       : super(key: key);
 
   final callback;

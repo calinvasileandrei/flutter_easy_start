@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -11,8 +11,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return
-      Container(
-        child: const Center(child: Text('HomePage')),
+      SafeArea(
+        child: Container(
+          child: const Center(child: Text('HomePage')),
+        ),
       );
   }
 }

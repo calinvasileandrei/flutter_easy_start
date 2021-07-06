@@ -1,23 +1,22 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 
 class User {
-  String firstName;
-  String lastName;
-  String email;
-  String token;
+  String? firstName;
+  String? lastName;
+  String? email;
+  String? token;
   User({
-    @required this.firstName,
-    @required this.lastName,
-    @required this.email,
-    @required this.token,
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+    required this.token,
   });
 
   User copyWith({
-    String firstName,
-    String lastName,
-    String email,
-    String token,
+    String? firstName,
+    String? lastName,
+    String? email,
+    String? token,
   }) {
     return User(
       firstName: firstName ?? this.firstName,
@@ -36,7 +35,7 @@ class User {
     };
   }
 
-  factory User.fromMapAPI(Map<String, dynamic> map, String token) {
+  factory User.fromMapAPI(Map<String, dynamic> map, String? token) {
     return User(
       firstName: map['firstName'],
       lastName: map['lastName'],

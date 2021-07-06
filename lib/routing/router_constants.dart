@@ -1,4 +1,8 @@
-const String homePageRoute = 'homepage';
-const String settingsPageRoute = 'settingspage';
-const String tabControllerPageRoute = 'tabcontrollerpage';
-const String loginPageRoute = 'loginpage';
+class RoutingConstants{
+  static const String homePageRoute = 'homepage';
+  static const String settingsPageRoute = 'settingspage';
+  static const String tabControllerPageRoute = 'tabcontrollerpage';
+  static const String loginPageRoute = 'loginpage';
+}
+
+

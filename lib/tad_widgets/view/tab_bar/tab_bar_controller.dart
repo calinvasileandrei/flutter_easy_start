@@ -8,7 +8,7 @@ import 'package:flutter_easy_start/tad_widgets/view/tab_bar/tab_icon.dart';
 import '../app_bar/app_bar_view.dart';
 
 class TabBarController extends StatefulWidget {
-  TabBarController({Key key}) : super(key: key);
+  TabBarController({Key? key}) : super(key: key);
 
   @override
   _TabBarControllerState createState() => _TabBarControllerState();
@@ -16,8 +16,8 @@ class TabBarController extends StatefulWidget {
 
 class _TabBarControllerState extends State<TabBarController>
     with TickerProviderStateMixin {
-  TabController _tabController;
-  List<Widget> myTabs;
+  TabController? _tabController;
+  late List<Widget> myTabs;
 
   // TODO: CHANGE THE APP TAB BAR PAGES AND ICONS
 
@@ -42,19 +42,19 @@ class _TabBarControllerState extends State<TabBarController>
         appBar: const AppBarCustom(),
         drawer: AppDrawer(),
         bottomNavigationBar: Container(
-          decoration: containerElevationShadow(
-              bgColor: Theme.of(context).backgroundColor),
-          child: SafeArea(
-              child: Theme( //To disable ripple effect on icon click i set this values to transparent
-                data: Theme.of(context).copyWith(
-                  splashColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                ),
-                child: TabBar(
-            tabs: myTabs,
-            controller: _tabController,
+          decoration: AppShapes.containerElevationShadow(bgColor: Theme.of(context).backgroundColor),
+          child: Theme( //To disable ripple effect on icon click i set this values to transparent
+            data: Theme.of(context).copyWith(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+            ),
+            child: SafeArea(
+              child: TabBar(
+              tabs: myTabs,
+              controller: _tabController,
           ),
-              )),
+            ),
+          ),
         ),
         body: Container(
           child: TabBarView(
@@ -64,7 +64,6 @@ class _TabBarControllerState extends State<TabBarController>
             children: [HomePage(), Container(), SettingsPage()],
           ),
         ),
-        extendBody: true,
         backgroundColor: Theme.of(context).backgroundColor,
       ),
     );
