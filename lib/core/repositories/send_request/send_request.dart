@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter_easy_start/core/repositories/response_message/response_message.dart';
 import 'package:flutter_easy_start/core/repositories/response_message/response_message_exception.dart';
 import 'package:flutter_easy_start/core/repositories/response_message/response_message_status.dart';
@@ -17,18 +16,19 @@ class SendRequests<T> {
   Future<ResponseMessage<T?>> send({
       required SendRequestsMethods method,
       required String endpoint,
-      required Map<ResponseMessageStatus, T Function(Map<String, dynamic>)>
-      actions,
+      required Map<ResponseMessageStatus, T Function(Map<String, dynamic>)> actions,
+      //TODO : implement use Server Messages
       Map<String, dynamic>? body,
       Map<String, String>? customHeader,
       String? parameter,
-      Map<ResponseMessageStatus, String>? messages
+      Map<ResponseMessageStatus, String>? messages,
+      String? authToken
       }) async {
     return await _requestSender(
         SendRequestMethodSelector.chose(method),
         _generateUrl(endpoint, parameter),
         actions,
-        _hasCustomHeaders(customHeader),
+        _generateHeader(customHeader,authToken),
         json.encode(body),
         messages);
   }
@@ -57,8 +57,7 @@ class SendRequests<T> {
       }
       // if the status codes is different from 200 cycle on all the supported status codes and return a [ResponseMessage] with the defined body in the action and message
       for (var action in actions.entries) {
-        if (response.statusCode ==
-            ResponseMessageStatusBinder.fromStatus(action.key)) {
+        if (response.statusCode == ResponseMessageStatusBinder.fromStatus(action.key)) {
           var bodyParsed = <String, dynamic>{};
           if (response.body.isNotEmpty) {
             bodyParsed = json.decode(response.body);
@@ -118,12 +117,21 @@ class SendRequests<T> {
 
   /// Returns a custom header if it was defined otherwise returns the default one [defaultHeader]
   Map<String, String> _hasCustomHeaders(Map<String, String>? header) {
-    if (header != null) {
-      return header;
-    }
-    return SendRequests.defaultHeader;
+      if (header != null) {
+        return header;
+      }
+      return SendRequests.defaultHeader;
   }
 
+  Map<String, String> _generateHeader(Map<String, String>? header,String? authToken){
+    Map<String, String> newHeader = _hasCustomHeaders(header);
+    if(authToken != null){
+      newHeader.addAll(<String,String>{'Authorization':'Bearer '+authToken});
+    }
+    return newHeader;
+  }
+
+  /// Return the url generated from [backendURL] + [endpoint] + [parameter]
   String _generateUrl(String endponint, String? parameter) {
     var url = backendURL + '/' + endponint;
     if (parameter != null && parameter.isNotEmpty) {

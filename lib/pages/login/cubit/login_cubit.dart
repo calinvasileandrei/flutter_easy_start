@@ -36,7 +36,6 @@ class LoginCubit extends Cubit<LoginState> {
     emit(LoginState(loading: true, user: user, status: status));
     // make the authentication request to the backend
     ResponseMessage<User?> response = await AuthRepository.authenticate(email: email, password: password);
-    print(response);
     //check the response status
     if (response.status == ResponseMessageStatus.s200) {
       user = response.body;

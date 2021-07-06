@@ -1,2 +1,4 @@
-//TODO: CHANGE NAME APP
-const appName = 'flutter_easy_start';
+class AppConstants{
+  //TODO: CHANGE NAME APP
+  static const appName = 'flutter_easy_start';
+}

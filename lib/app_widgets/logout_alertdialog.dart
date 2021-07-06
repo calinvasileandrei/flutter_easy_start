@@ -7,7 +7,7 @@ class LogoutAlerDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      shape: appCardShape,
+      shape: AppShapes.appCardShape,
       title: Text(
         "Attenzione",
         style: Theme.of(context).textTheme.subtitle2,
